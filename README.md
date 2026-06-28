@@ -1,17 +1,35 @@
-# leetcode
+# LeetCode
 
-Archive of leetcode 
+A personal archive of LeetCode solutions and practice problems.
 
 ## Setup
 
-create venv: `python3 -m venv .venv`
-
-### brew
+Create and activate a Python virtual environment:
 
 ```sh
-brew install act # github actions
-brew install just # justfile
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
-### justfile
-For common actions such as linting, formatting, and running leetcode tests
+## Tooling
+
+This repository uses a small set of local development tools.
+
+### Homebrew dependencies
+
+```sh
+brew install act   # run GitHub Actions locally
+brew install just  # project command runner
+```
+
+### Justfile
+
+Common project commands are defined in the `justfile`, including linting, formatting, and executing LeetCode test files.
+
+Example usage:
+
+```sh
+just check
+just fix
+just algorithms
+```
