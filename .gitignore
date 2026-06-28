@@ -1,0 +1,21 @@
+# VirtualEnv
+venv*
+.direnv
+.venv
+
+# local files
+instance/
+
+# Compiled python modules
+__pycache__/
+*.pyc
+
+# Env vars
+.DS_Store
+.envrc
+
+# VSCode files
+**/.vscode/*
+# exclude files in .vscode, except these:
+!**/.vscode/*.sample
+!**/.vscode/extensions.json
