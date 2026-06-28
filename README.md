@@ -14,4 +14,4 @@ brew install just # justfile
 ```
 
 ### justfile
-For common actions such as install, linting & formatting, and running leetcode tests
+For common actions such as linting, formatting, and running leetcode tests
