@@ -6,13 +6,12 @@ Archive of leetcode
 
 create venv: `python3 -m venv .venv`
 
-### github actions
+### brew
 
 ```sh
-brew install act
+brew install act # github actions
+brew install just # justfile
 ```
 
-Test:
-```sh
-act pull_request -j ruff -W .github/workflows/ruff.yml
-```
+### justfile
+For common actions such as install, linting & formatting, and running leetcode tests
