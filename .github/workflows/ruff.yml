@@ -1,0 +1,71 @@
+name: Ruff
+
+on:
+  pull_request:
+    paths:
+      - "**/*.py"
+      - "pyproject.toml"
+      - "requirements.txt"
+      - "ruff.toml"
+      - ".ruff.toml"
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Get changed Python files
+        id: changed-files
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_REF="${{ github.base_ref }}"
+
+            if [ -z "$BASE_REF" ]; then
+              BASE_REF="main"
+            fi
+
+            git fetch origin "$BASE_REF"
+            CHANGED_FILES=$(git diff --name-only --diff-filter=ACMR "origin/$BASE_REF"...HEAD -- '*.py')
+          else
+            CHANGED_FILES=$(git diff --name-only --diff-filter=ACMR HEAD~1 HEAD -- '*.py')
+          fi
+
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$CHANGED_FILES" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Ruff check changed files
+        if: steps.changed-files.outputs.files != ''
+        shell: bash
+        run: |
+          ruff check ${{ steps.changed-files.outputs.files }}
+
+      - name: Ruff format check changed files
+        if: steps.changed-files.outputs.files != ''
+        shell: bash
+        run: |
+          ruff format --check ${{ steps.changed-files.outputs.files }}
+
+      - name: No Python files changed
+        if: steps.changed-files.outputs.files == ''
+        run: echo "No changed Python files to lint."
