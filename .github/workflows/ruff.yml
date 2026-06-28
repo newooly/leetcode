@@ -56,15 +56,21 @@ jobs:
 
       - name: Ruff check changed files
         if: steps.changed-files.outputs.files != ''
+        env:
+          CHANGED_FILES: ${{ steps.changed-files.outputs.files }}
         shell: bash
         run: |
-          ruff check ${{ steps.changed-files.outputs.files }}
+          mapfile -t files <<< "$CHANGED_FILES"
+          ruff check "${files[@]}"
 
       - name: Ruff format check changed files
         if: steps.changed-files.outputs.files != ''
+        env:
+          CHANGED_FILES: ${{ steps.changed-files.outputs.files }}
         shell: bash
         run: |
-          ruff format --check ${{ steps.changed-files.outputs.files }}
+          mapfile -t files <<< "$CHANGED_FILES"
+          ruff format --check "${files[@]}"
 
       - name: No Python files changed
         if: steps.changed-files.outputs.files == ''
