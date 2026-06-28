@@ -5,7 +5,7 @@
 import unittest
 
 
-class Solution(object):
+class Solution:
     def twoSum(self, nums, target):
         """
         To find two numbers in the list `nums` that add up to the `target`.
@@ -13,7 +13,7 @@ class Solution(object):
         :type nums: List[int]
         :type target: int
         :rtype: List[int]
-        
+
         """
         seen = {}
         for i, num in enumerate(nums):
