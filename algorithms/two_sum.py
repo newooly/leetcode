@@ -8,7 +8,7 @@ import unittest
 class Solution:
     def twoSum(self, nums, target):
         """
-        To find two numbers in the list `nums` that add up to the `target`.
+        Find two numbers in `nums` that add up to `target`.
 
         :type nums: List[int]
         :type target: int
