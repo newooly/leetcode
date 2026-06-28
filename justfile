@@ -1,4 +1,5 @@
-algorithms: python3 -m unittest discover -s algorithms -t . -p "*.py"
+algorithms:
+  python3 -m unittest discover -s algorithms -t . -p "*.py"
 
 check:
   # Check Python code formatting and linting issues
