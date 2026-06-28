@@ -3,7 +3,8 @@ permutation-sequence https://leetcode.com/problems/permutation-sequence/
 
 The set [1, 2, 3, ..., n] contains a total of n! unique permutations.
 
-By listing and labeling all of the permutations in order, we get the following sequence for n = 3:
+By listing and labeling all of the permutations in order,
+we get the following sequence for n = 3:
 
 "123"
 "132"
@@ -11,6 +12,7 @@ By listing and labeling all of the permutations in order, we get the following s
 "231"
 "312"
 "321"
+
 Given n and k, return the kth permutation sequence.
 
 Example 1:
@@ -22,7 +24,7 @@ Output: "213"
 import unittest
 
 
-class Solution(object):
+class Solution:
     def getPermutation(self, n, k):
         """
         :type n: int
@@ -52,7 +54,6 @@ class Solution(object):
 
         # n=3, j range: 3,2,1
         for j in range(n, 0, -1):
-
             # reduce factorial, j=3, factorial=2!=2
             factorial //= j
 
@@ -62,7 +63,7 @@ class Solution(object):
             # add indexed number to res
             res += str(res_nums.pop(index))
 
-            # remove used factorial index 
+            # remove used factorial index
             # prev [1, 2, 3] uses 3! perms, new [1, 3] uses [2!] perms
             k %= factorial
 
