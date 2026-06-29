@@ -29,7 +29,7 @@ Common project commands are defined in the `justfile`, including linting, format
 Example usage:
 
 ```sh
-just check
-just fix
-just algorithms
+just check       # check lint and formatting
+just fix         # fix lint and formatting
+just algorithms  # run all tests in algorithms/
 ```
